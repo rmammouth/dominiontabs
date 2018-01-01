@@ -546,16 +546,14 @@
         "untranslated": "description, extra"
     },
     "Altar": {
-        "description": "Trash a card from your hand. Gain a card costing up to 5 Coins.", 
-        "extra": "You trash a card from your hand if you can, and then gain a card whether or not you trashed one. The gained card comes from the Supply and is put into your discard pile.", 
-        "name": "Autel", 
-        "untranslated": "description, extra"
+        "description": "Écartez une carte de votre main. Recevez une carte coûtant jusqu'à 5 Coins.", 
+        "extra": "Vous écartez une carte de votre main si vous le pouvez, puis vous recevez une carte que vous en ayez écarté une ou non. La carte reçue provient de la réserve et est mise dans votre défausse.", 
+        "name": "Autel"
     },
     "Armory": {
-        "description": "Gain a card costing up to 4 Coins, putting it on top of your deck.", 
-        "extra": "The card you gain comes from the Supply and is put on top of your deck.", 
-        "name": "Armurerie", 
-        "untranslated": "description, extra"
+        "description": "Recevez une carte coûtant jusqu'à 4 Coins et placez-la sur votre deck.", 
+        "extra": "La carte que vous recevez provient de la réserve et est placée au-dessus de votre deck.", 
+        "name": "Armurerie"
     },
     "Band of Misfits": {
         "description": "Play this as if it were an Action card in the Supply costing less than it that you choose.<n>This is that card until it leaves play.", 
@@ -564,10 +562,9 @@
         "untranslated": "description, extra"
     },
     "Bandit Camp": {
-        "description": "+1 Card<br>+2 Actions<n>Gain a Spoils from the Spoils pile.", 
-        "extra": "Draw a card before gaining a Spoils. The Spoils comes from the Spoils pile, which is not part of the Supply, and is put into your discard pile. If there are no Spoils cards left, you do not get one.", 
-        "name": "Camp de bandits", 
-        "untranslated": "description, extra"
+        "description": "+1 Carte<br>+2 Actions<n>Recevez une carte <i>Butin</i> de la pile <i>Butin</i>.", 
+        "extra": "Piochez une carte avant de recevoir un Butin. Le Butin provient de la pile Butin, qui ne fait pas partie de la Réserve, et est placé dans votre défausse. S'il n'y a plus de cartes Butin, vous n'en recevez pas.", 
+        "name": "Camp de bandits"
     },
     "Beggar": {
         "description": "Gain 3 Coppers, putting them into your hand.<line>When another player plays an Attack card, you may discard this.<n>If you do, gain two Silvers, putting one on top of your deck.", 
@@ -576,10 +573,9 @@
         "untranslated": "description, extra"
     },
     "Catacombs": {
-        "description": "Look at the top 3 cards of your deck.<n>Choose one: Put them into your hand;<n>or discard them and +3 Cards.<line>When you trash this, gain a cheaper card.", 
-        "extra": "When you play this, you look at the top 3 cards of your deck, and either put all 3 into your hand, or discard all 3 and draw the next 3 cards. If you discard them and have to shuffle to draw 3 cards, you will shuffle in the cards you discarded and may end up drawing some of them. When you trash Catacombs, you gain a card costing less than it. This happens whether Catacombs is trashed on your turn or someone else's, and no matter who has the card that trashed it. The gained card comes from the Supply and is put into your discard pile.", 
-        "name": "Catacombes", 
-        "untranslated": "description, extra"
+        "description": "Consultez les 3 premières cartes de votre deck.<n>Choisissez : Ajoutez-les à votre main <b>OU</b> défaussez-les et +3 Cartes.<line>Lorsque vous écartez cette carte, recevez une carte moins coûteuse.", 
+        "extra": "Quand vous jouez cette carte, vous regardez les 3 premières cartes de votre deck, et soit vous les placez toutes les 3 dans votre main, soit vous les défaussez toutes les 3 et piochez les 3 cartes suivantes. Si vous les défaussez et devez mélanger pour piocher 3 cartes, vous mélangez les cartes défaussées et piocherez peut-être les mêmes à nouveau. Lorsque vous écartez Catacombes, vous recevez une carte qui coûte moins cher. Cela se produit que les Catacombes soient écartées pendant votre tour ou pendant celui d'un autre joueur, peu importe qui détient la carte qui a écarté Catacombes. La carte reçue provient de la réserve et est mise dans votre défausse.", 
+        "name": "Catacombes"
     },
     "Count": {
         "description": "Choose one: Discard 2 cards; or put a card from your hand on top of your deck; or gain a Copper.<n><n>Choose one: +3 Coins; or trash your hand; or gain a Duchy.", 
@@ -600,10 +596,9 @@
         "untranslated": "description, extra"
     },
     "Death Cart": {
-        "description": "+5 Coins<n>You may trash an Action card from your hand. If you don't, trash this.<line>When you gain this, gain 2 Ruins.", 
-        "extra": "When you play Death Cart, you get + 5 Coins, and either trash an Action card from your hand, or trash the Death Cart. If you have no Action card in your hand, you will have to trash the Death Cart, but you can trash the Death Cart whether or not you have an Action card in hand. A card with multiple types, one of which is Action, is an Action card. When you gain a Death Cart, either from buying it or from gaining it some other way, you also gain 2 Ruins. You just take the top 2, whatever they are. If there are not enough Ruins left, take as many as you can. The Ruins come from the Supply and are put into your discard pile. The other players get to see which ones you got. The player gaining Death Cart is the one who gains Ruins; if Possession (from Alchemy) is used to make another player buy Death Cart, the player actually gaining the Death Cart (the one who played Possession) gains the Ruins. If you use Trader (from Hinterlands) to take a Silver instead of a Death Cart, you do not gain any Ruins. It doesn't matter whose turn it is; if you use Ambassador (from Seaside) to give Death Carts to each other player, those players also gain Ruins. Passing cards with Masquerade (from Intrigue) does not count as gaining them.", 
-        "name": "Charrette de cadavres", 
-        "untranslated": "description, extra"
+        "description": "+5 Coins<n>Vous pouvez écarter une carte <i>Action</i> de votre main Si vous ne le faites pas, écartez cette carte-ci.<line>Lorsque vous recevez cette carte, recevez 2 cartes <i>Ruines</i>.", 
+        "extra": "Lorsque vous jouez Charette de Cadavres, vous gagnez +5 Coins, puis soit vous écartez une carte Action de votre main, soit vous écartez la Charette de Cadavres. Si vous n'avez pas de carte Action dans votre main, vous devez écarter la Charette de Cadavres, mais vous pouvez écarter la Charette de Cadavres que vous ayez une carte Action en main ou pas. Une carte avec plusieurs types, dont Action, est une carte Action. Lorsque vous recevez une Charette de Cadavres, que ce soit en l'achetant ou en la recevant d'une autre manière, vous recevez également 2 Ruines. Vous prenez juste les 2 du haut de la pile, quelles qu'elles soient. S'il n'y a plus assez de Ruines, prenez-en autant que vous pouvez. Les Ruines viennent de la réserve et sont mises dans votre défausse. Les autres joueurs peuvent voir lesquelles vous avez reçues. Le joueur qui reçoit Charette de Cadavres est celui qui reçoit les Ruines; si Possession (d'Alchimie) est utilisée pour faire acheter Charette de Cadavres à un autre joueur, le joueur qui reçoit réellement la Charette de Cadavres (celui qui a joué Possession) reçoit les Ruines. Si vous utilisez Troqueuse (de l'Arrière-Pays) pour prendre un Argent au lieu d'une Charette de Cadavres, vous ne recevez aucune Ruine. Peu importe à qui c'est le tour de jouer; Si vous utilisez Ambassadeur (de Rivages) pour donner des Charette de Cadavres à chaque autre joueur, ces joueurs gagnent également des Ruines. Passer des cartes avec Mascarade (d'Intrigue) n'est pas considéré comme recevoir.", 
+        "name": "Charrette de cadavres"
     },
     "Feodum": {
         "description": "Worth 1<VP> for every 3 Silvers in your deck (round down).<line>When you trash this, gain 3 Silvers.", 
@@ -654,10 +649,9 @@
         "untranslated": "description, extra"
     },
     "Junk Dealer": {
-        "description": "+1 Card<br>+1 Action<br>+1 Coin<n>Trash a card from your hand.", 
-        "extra": "You have to trash a card from your hand if you can. You draw before trashing.", 
-        "name": "Brocanteur", 
-        "untranslated": "description, extra"
+        "description": "+1 Carte<br>+1 Action<br>+1 Coin<n>Écartez une carte de votre main.", 
+        "extra": "Vous devez écarter une carte de votre main si vous le pouvez. Vous piochez avant d'écarter.", 
+        "name": "Brocanteur"
     },
     "Knights": {
         "description": "This is a pile in which each card is different. There is the same basic ability on each card, but also another ability unique to that card in the pile, and they all have different names. Shuffle the Knights pile before playing with it, keeping it face down except for the top one, which is the only card that can be gained from the pile. See Additional Rules for Dark Ages and Preparation. Follow the rules on Knights in order from top to bottom; Sir Michael causes players to discard before it trashes cards.", 
@@ -738,10 +732,9 @@
         "untranslated": "description, extra"
     },
     "Rogue": {
-        "description": "+ 2 Coins<n>If there are any cards in the trash costing from 3 Coins to 6 Coins, gain one of them. Otherwise, each other player reveals the top 2 cards of his deck, trashes one of them costing from 3 Coins to 6 Coins, and discards the rest.", 
-        "extra": "If there is a card in the trash costing from 3 Coins to 6 Coins, you have to gain one of them; it is not optional. You can look through the trash at any time. The other players get to see what card you took. The gained card goes into your discard pile. Cards with Potion in the cost (from Alchemy) do not cost from 3 Coins to 6 Coins. If there was no card in the trash costing from 3 Coins to 6 Coins, you instead have each other player reveal the top 2 cards of his deck, trash one of them of his choice that costs from 3 Coins to 6 Coins (if possible), and discard the rest. Go in turn order, starting with the player to your left.", 
-        "name": "Bandit", 
-        "untranslated": "description, extra"
+        "description": "+2 Coins<n>S'il y a une ou des cartes dans le <i>Rebut</i> coûtant de 3 Coins à 6 Coins, recevez une de ces cartes. Sinon, chacun de vos adversaires dévoile les 2 premières cartes de son deck, écarte une carte coûtant de 3 Coins à 6 Coins et défausse le reste.", 
+        "extra": "S'il y a une carte dans le rebut qui coûte de 3 Coins à 6 Coins, vous devez la recevoir; ce n'est pas optionnel. Vous pouvez consulter le rebut à tout moment. Les autres joueurs peuvent voir quelle carte vous avez prise. La carte reçue va dans votre défausse. Les cartes avec Potion dans leur coût (d'Alchimie) ne coûtent pas de 3 Coins à 6 Coins. S'il n'y avait pas de carte dans le rebut coûtant de 3 Coins à 6 Coins, les autres joueurs doivent révéler les 2 cartes du dessus de leur deck, en écarter une de leur choix coûtant de 3 Coins à 6 Coins (si possible), et défausser le reste. Procédez dans l'ordre du tour, en commençant par le joueur à votre gauche.", 
+        "name": "Bandit"
     },
     "Ruins": {
         "description": "<left><u>Abandoned Mine</u>: +1 Coin<br><u>Ruined Library</u>: +1 Card<br><u>Ruined Market</u>: +1 Buy<br><u>Ruined Village</u>: +1 Action<br><u>Survivors</u>: Look at the top 2 cards of your deck. Discard them or put them back in any order.", 
@@ -762,10 +755,9 @@
         "untranslated": "description, extra"
     },
     "Spoils": {
-        "description": "3 <*COIN*><n>When you play this, return it to the Spoils pile.<n><i>(This is not in the Supply.)</i>", 
-        "extra": "This is never in the Supply; it can only be obtained via Bandit Camp, Marauder, and Pillage. When you play Spoils, you get +3 Coins to spend this turn, and return that copy of Spoils to its pile. You are not forced to play Treasures in your hand.", 
-        "name": "Butin", 
-        "untranslated": "description, extra"
+        "description": "3 <*COIN*><n>Lorsque vous jouez cette carte, remettez-la sur la pile <i>Butin</i>.<n><i>(La pile Butin ne fait pas partie de la réserve.)</i>", 
+        "extra": "Cette pile n'est jamais dans la réserve; Butin ne peut être obtenu que via Camp de Bandits, Maraudeur et Pillage. Quand vous jouez Butin, vous gagnez +3 Coins à dépenser ce tour, et renvoyez cette carte Butin dans sa pile. Vous n'êtes pas obligé de jouer des Trésors de votre main.", 
+        "name": "Butin"
     },
     "Squire": {
         "description": "+1 Coin<n>Choose one: +2 Actions; or +2 Buys; or gain a Silver.<line>When you trash this, gain an Action card.", 
