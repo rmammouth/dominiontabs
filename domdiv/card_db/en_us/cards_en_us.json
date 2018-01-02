@@ -566,7 +566,7 @@
     },
     "Forager": {
         "description": "+1 Action<br>+1 Buy<n>Trash a card from your hand.<n>+1 Coin per differently named Treasure in the trash.", 
-        "extra": "Trash a card from your hand if you can. Whether or not you can, you still get +1 Coin er differently named Treasure in the trash, plus +1 Action and +1 Buy. Multiple copies of the same Treasure card do not increase how much you get. For example, if the trash has four Coppers, a Counterfeit, and six Estates, you get +2 Coins. Cards with multiple types, one of which is Treasure (such as Harem from Intrigue), are Treasures.", 
+        "extra": "Trash a card from your hand if you can. Whether or not you can, you still get +1 Coin per differently named Treasure in the trash, plus +1 Action and +1 Buy. Multiple copies of the same Treasure card do not increase how much you get. For example, if the trash has four Coppers, a Counterfeit, and six Estates, you get +2 Coins. Cards with multiple types, one of which is Treasure (such as Harem from Intrigue), are Treasures.", 
         "name": "Forager"
     },
     "Fortress": {
