@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '3.4.0'
+version = '3.4.3'
 
 setup(
     name="domdiv",
@@ -13,6 +13,8 @@ setup(
     packages=find_packages(exclude=['tests']),
     install_requires=["reportlab>=3.4.0",
                       "Pillow>=4.1.0"],
+    setup_requires=["pytest-runner"],
+    tests_require=["pytest", "pytest-flake8", "six"],
     url='http://domtabs.sandflea.org',
     include_package_data=True,
     author="Peter Gorniak",

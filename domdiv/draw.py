@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import os
 import re
 import sys
@@ -7,8 +9,8 @@ import pkg_resources
 from reportlab.lib.units import cm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.platypus import Paragraph
-from reportlab.lib.enums import TA_JUSTIFY, TA_CENTER
+from reportlab.platypus import Paragraph, XPreformatted
+from reportlab.lib.enums import TA_JUSTIFY, TA_CENTER, TA_LEFT
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase.pdfmetrics import stringWidth
@@ -48,8 +50,8 @@ class DividerDrawer(object):
         # then make sure that we have at least one for each type
         for fonttype in self.font_mapping:
             if not len(self.font_mapping[fonttype]):
-                print >> sys.stderr, ("Warning, Minion Pro ttf file for {} missing from domdiv/fonts!"
-                                      " Falling back on Times font for everything.").format(fonttype)
+                print(("Warning, Minion Pro ttf file for {} missing from domdiv/fonts!"
+                       " Falling back on Times font for everything.").format(fonttype), file=sys.stderr)
                 self.font_mapping = {'Regular': 'Times-Roman',
                                      'Bold': 'Times-Bold',
                                      'Italic': 'Times-Oblique'}
@@ -61,6 +63,100 @@ class DividerDrawer(object):
                                                pkg_resources.resource_filename('domdiv',
                                                                                self.font_mapping[fonttype][0])))
                 self.font_mapping[fonttype] = ftag
+        self.font_mapping['Monospaced'] = 'Courier'
+
+    def drawTextPages(self, pages, margin=1.0, fontsize=10, leading=10, spacer=0.05):
+        s = getSampleStyleSheet()['BodyText']
+        s.fontName = self.font_mapping['Monospaced']
+        s.alignment = TA_LEFT
+
+        textHorizontalMargin = margin * cm
+        textVerticalMargin = margin * cm
+        textBoxWidth = self.options.paperwidth - 2 * textHorizontalMargin
+        textBoxHeight = self.options.paperheight - 2 * textVerticalMargin
+        minSpacerHeight = 0.05 * cm
+
+        for page in pages:
+            s.fontsize = fontsize
+            s.leading = leading
+            spacerHeight = spacer * cm
+            text = re.split("\n", page)
+            while True:
+                paragraphs = []
+                # this accounts for the spacers we insert between paragraphs
+                h = (len(text) - 1) * spacerHeight
+                for line in text:
+                    p = XPreformatted(line, s)
+                    h += p.wrap(textBoxWidth, textBoxHeight)[1]
+                    paragraphs.append(p)
+
+                if h <= textBoxHeight or s.fontSize <= 1 or s.leading <= 1:
+                    break
+                else:
+                    s.fontSize -= 0.2
+                    s.leading -= 0.2
+                    spacerHeight = max(spacerHeight - 1, minSpacerHeight)
+
+            h = self.options.paperheight - textVerticalMargin
+            for p in paragraphs:
+                h -= p.height
+                p.drawOn(self.canvas, textHorizontalMargin, h)
+                h -= spacerHeight
+            self.canvas.showPage()
+
+    def drawInfo(self, printIt=True):
+        # Keep track of the number of pages
+        pageCount = 0
+        # A unique separator that will not be found in any normal text.  Was '@@@***!!!***@@@' at one time.
+        sep = chr(30) + chr(31)
+        # Generic space.  Other options are ' ', '&nbsp;', '&#xa0;'
+        space = '&nbsp;'
+        tab_spaces = 4
+        blank_line = (space + '\n') * 2
+
+        if self.options.info or self.options.info_all:
+            text = "<para alignment='center'><font size=18><b>Sumpfork's Dominion Tabbed Divider Generator</b></font>\n"
+            text += blank_line
+            text += "Online generator at: "
+            text += "<a href='http://domtabs.sandflea.org/' color='blue'>http://domtabs.sandflea.org</a>\n\n"
+            text += "Source code on GitHub at: "
+            text += "<a href='https://github.com/sumpfork/dominiontabs' color='blue'>"
+            text += "https://github.com/sumpfork/dominiontabs</a>\n\n"
+            text += "Options for this file:\n"
+
+            cmd = " ".join(self.options.argv)
+            cmd = cmd.replace(' --', sep + '--')
+            cmd = cmd.replace(' -', sep + '-')
+            cmd = cmd.replace(sep, '\n' + space * tab_spaces)
+
+            text += cmd
+            text += blank_line
+
+            if printIt:
+                self.drawTextPages([text], margin=1.0, fontsize=10, leading=10, spacer=0.05)
+            pageCount += 1
+
+        if self.options.info_all:
+            linesPerPage = 80
+            lines = self.options.help.replace('\n\n', blank_line).replace(' ', space).split('\n')
+            pages = []
+            lineCount = 0
+            text = ""
+            for line in lines:
+                lineCount += 1
+                text += line + '\n'
+                if lineCount >= linesPerPage:
+                    pages.append(text)
+                    pageCount += 1
+                    lineCount = 0
+                    text = ""
+            if text:
+                pages.append(text)
+                pageCount += 1
+            if printIt:
+                self.drawTextPages(pages, margin=0.75, fontsize=6, leading=7, spacer=0.1)
+
+        return pageCount
 
     def wantCentreTab(self, card):
         return (card.isExpansion() and self.options.centre_expansion_dividers) or self.options.tab_side == "centre"
@@ -222,6 +318,8 @@ class DividerDrawer(object):
             options.outfile,
             pagesize=(options.paperwidth, options.paperheight))
         self.drawDividers(cards)
+        if options.info or options.info_all:
+            self.drawInfo()
         self.canvas.save()
 
     def add_inline_images(self, text, fontsize):
@@ -280,30 +378,38 @@ class DividerDrawer(object):
         text = card.getBonusBoldText(text)
 
         # <line>
-        replace = "<center>%s\n" % ("&ndash;" * 22)
-        text = re.sub("\<line\>", replace, text)
-
+        replace = "<center>{}</center>\n".format("&ndash;" * 22)
+        text = re.sub(r"\<line\>", replace, text)
         #  <tab> and \t
-        text = re.sub("\<tab\>", '\t', text)
-        text = re.sub("\<t\>", '\t', text)
-        text = re.sub("\t", "&nbsp;" * 4, text)
+        text = re.sub(r"\<tab\>", '\t', text)
+        text = re.sub(r"\<t\>", '\t', text)
+        text = re.sub(r"\t", "&nbsp;" * 4, text)
 
         # various breaks
-        text = re.sub("\<br\>", "<br />", text)
-        text = re.sub("\<n\>", "\n", text)
+        text = re.sub(r"\<br\>", "<br />", text)
+        text = re.sub(r"\<n\>", "\n", text)
 
         # alignments
-        text = re.sub("\<c\>", "<center>", text)
-        text = re.sub("\<center\>", "\n<para alignment='center'>", text)
+        text = re.sub(r"\<c\>", "<center>", text)
+        text = re.sub(r"\<center\>", "\n<para alignment='center'>", text)
+        text = re.sub(r"\</c\>", "</center>", text)
+        text = re.sub(r"\</center\>", "</para>", text)
 
-        text = re.sub("\<l\>", "<left>", text)
-        text = re.sub("\<left\>", "\n<para alignment='left'>", text)
+        text = re.sub(r"\<l\>", "<left>", text)
+        text = re.sub(r"\<left\>", "\n<para alignment='left'>", text)
+        text = re.sub(r"\</l\>", "</left>", text)
+        text = re.sub(r"\</left\>", "</para>", text)
 
-        text = re.sub("\<r\>", "<right>", text)
-        text = re.sub("\<right\>", "\n<para alignment='right'>", text)
+        text = re.sub(r"\<r\>", "<right>", text)
+        text = re.sub(r"\<right\>", "\n<para alignment='right'>", text)
+        text = re.sub(r"\</r\>", "</right>", text)
+        text = re.sub(r"\</right\>", "</para>", text)
 
-        text = re.sub("\<j\>", "<justify>", text)
-        text = re.sub("\<justify\>", "\n<para alignment='justify'>", text)
+        text = re.sub(r"\<j\>", "<justify>", text)
+        text = re.sub(r"\<justify\>", "\n<para alignment='justify'>", text)
+        text = re.sub(r"\</j\>", "</justify>", text)
+        text = re.sub(r"\</justify\>", "</para>", text)
+
         return text.strip().strip('\n')
 
     def drawOutline(self,
@@ -413,7 +519,7 @@ class DividerDrawer(object):
 
             # now draw the number of sets
             if count > 1:
-                count_string = u"{}\u00d7".format(count)
+                count_string = "{}\u00d7".format(count)
                 width_string = stringWidth(count_string, self.font_mapping['Regular'], 10)
                 width_string -= 1  # adjust to make it closer to image
                 width += width_string
@@ -544,7 +650,7 @@ class DividerDrawer(object):
             card.getType().getTabTextHeightOffset()
 
         # draw banner
-        img = card.getType().getNoCoinTabImageFile()
+        img = card.getType().getTabImageFile()
         if not self.options.no_tab_artwork and img:
             self.canvas.drawImage(
                 DividerDrawer.get_image_filepath(img),
@@ -613,8 +719,6 @@ class DividerDrawer(object):
                 name_lines = name.split(None, 1)
         else:
             name_lines = [name]
-        # if tooLong:
-        #    print name
 
         for linenum, line in enumerate(name_lines):
             h = textHeight
@@ -975,7 +1079,7 @@ class DividerDrawer(object):
             for i, card in enumerate(pageCards):
                 # print card
                 x = i % self.options.numDividersHorizontal
-                y = i / self.options.numDividersHorizontal
+                y = i // self.options.numDividersHorizontal
                 self.canvas.saveState()
                 self.drawDivider(card,
                                  x,
@@ -999,7 +1103,7 @@ class DividerDrawer(object):
                 # print card
                 x = (self.options.numDividersHorizontal - 1 - i
                      ) % self.options.numDividersHorizontal
-                y = i / self.options.numDividersHorizontal
+                y = i // self.options.numDividersHorizontal
                 self.canvas.saveState()
                 self.drawDivider(card,
                                  x,
